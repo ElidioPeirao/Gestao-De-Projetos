@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciador de Projetos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Login -->
+    <section id="login" class="page full-center">
+      <div class="card glass">
+        <p class="subtitle">Faça login para acessar</p>
+        <form id="login-form">
+          <label>
+            Email
+            <input type="email" id="email" placeholder="email@empresa.com" required />
+          </label>
+          <label>
+            Senha
+            <input type="password" id="password" placeholder="••••••••" required />
+          </label>
+          <button type="submit" class="btn primary" id="login-btn">
+            Entrar
+          </button>
+          <p id="login-error" class="error" hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="page" hidden>
+      <header class="appbar glass appbar-new">
+        <div class="brand brand-new">
+          <div class="brand-text">
+            <h2 class="brand-title">Meus Projetos</h2>
+            <span id="welcome-text" class="brand-sub">Bem-vindo</span>
+          </div>
+        </div>
+        <div class="header-actions header-new">
+          <input id="search-input" class="search-input" placeholder="Buscar..." />
+          <button class="btn ghost" id="view-toggle" title="Alternar">Cards</button>
+          <button class="btn primary" id="new-project-btn" title="Novo Projeto">Novo Projeto</button>
+          <button class="btn ghost" id="admin-btn" title="Bloquear">Bloquear</button>
+          <button class="btn ghost" id="logout-btn">Sair</button>
+        </div>
+      </header>
+
+      <aside id="sidebar" class="sidebar glass">
+        <div class="sidebar-title">Explorar</div>
+        <div class="filters">
+          <button class="filter-chip selected" id="filter-all">Tudo</button>
+          <button class="filter-chip" id="filter-folders">Pastas</button>
+          <button class="filter-chip" id="filter-images">Imagens</button>
+          <button class="filter-chip" id="filter-pdfs">PDFs</button>
+          <button class="filter-chip" id="filter-models">Modelos 3D</button>
+        </div>
+      </aside>
+
+      <!-- Upload progress bar -->
+      <div id="upload-progress" class="progress" hidden>
+        <div class="bar" id="upload-progress-bar"></div>
+        <div class="label" id="upload-progress-text">0%</div>
+      </div>
+
+      <main class="content">
+        <nav id="breadcrumbs" class="breadcrumbs glass pathbar"></nav>
+        <input id="file-input" type="file" multiple hidden />
+
+        <div id="items" class="items grid modern"></div>
+
+        <div id="empty" class="empty" hidden>
+          <h3>Nenhum item encontrado</h3>
+          <p>Crie uma nova pasta ou faça upload de arquivos</p>
+        </div>
+        
+      </main>
+
+      <div id="dropzone" class="dropzone" hidden>
+        <div class="dropzone-content">
+          Solte arquivos aqui para enviar
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Admin -->
+    <section id="admin-modal" class="modal" hidden>
+      <div class="modal-content glass">
+        <h3>Senha de Administrador</h3>
+        <p class="subtitle">Necessária para excluir pastas e arquivos</p>
+        <input type="password" id="admin-password" placeholder="Digite a senha" />
+        <div class="modal-actions">
+          <button class="btn ghost" id="admin-cancel">Cancelar</button>
+          <button class="btn primary" id="admin-confirm">Entrar</button>
+        </div>
+        <p id="admin-error" class="error" hidden>Senha incorreta</p>
+      </div>
+    </section>
+
+    <!-- Modal Viewer 3D -->
+    <section id="viewer-modal" class="modal" hidden>
+      <div class="modal-content glass">
+        <div class="modal-bar">
+          <h3>Visualizador 3D (STL)</h3>
+          <div class="modal-actions">
+            <button class="btn ghost" id="viewer-center" title="Centralizar">Centralizar</button>
+            <button class="btn ghost" id="viewer-close">Fechar</button>
+          </div>
+        </div>
+        <div id="viewer-canvas" class="viewer-canvas"></div>
+      </div>
+    </section>
+
+    <!-- Firebase Config (preencha com suas chaves) -->
+    <!-- Import map para Three.js para resolver imports em loaders/controls -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.157.0/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module" src="./firebase-config.js"></script>
+    <!-- App logic -->
+    <script type="module" src="./app.js"></script>
+    
+  </body>
+  </html>
